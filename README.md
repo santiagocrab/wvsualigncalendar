@@ -2,7 +2,12 @@
 
 Official read-only unified calendar for the **West Visayas State University University Student Council**, Academic Year 2026–2027.
 
-**Live site:** [https://santiagocrab.github.io/wvsualigncalendar/](https://santiagocrab.github.io/wvsualigncalendar/)
+**Live site:** [https://santiagocrab.github.io/wvsualigncalendar/](https://santiagocrab.github.io/wvsualigncalendar/) (enable GitHub Pages → **Deploy from branch** → `gh-pages` → `/ (root)`)
+
+## Repository
+
+- **Source code:** `main` branch
+- **GitHub Pages build:** `gh-pages` branch (production `dist/` only)
 
 ## Run locally
 
