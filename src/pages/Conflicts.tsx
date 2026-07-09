@@ -21,44 +21,45 @@ export default function ConflictsPage() {
 
   return (
     <div className="max-w-5xl mx-auto space-y-6">
-      <div className="rounded-2xl bg-usc-rose-wash dark:bg-usc-rose/10 border border-usc-rose/20 p-8 shadow-sm">
-        <div className="flex items-start gap-4">
-          <div className="w-14 h-14 rounded-2xl bg-usc-rose/15 flex items-center justify-center shrink-0">
-            <ShieldAlert size={28} className="text-usc-rose" />
-          </div>
-          <div>
-            <p className="text-usc-rose/80 text-xs font-semibold uppercase tracking-widest">Featured · Scheduling Intelligence</p>
-            <h1 className="text-3xl font-bold text-usc-black dark:text-[#F0EDE8] mt-1 flex items-center gap-2">
-              Conflict Checker
-            </h1>
-            <p className="text-usc-muted dark:text-white/55 text-sm mt-2 max-w-xl leading-relaxed">
-              Lists only cross-organization physical venue clashes — excludes online, TBA/TBD venues, and same-host bookings ({conflicts.length} flagged).
-            </p>
-            <div className="flex flex-wrap gap-3 mt-5">
-              <span className="px-3 py-1.5 rounded-full bg-usc-rose/15 text-usc-rose text-sm font-semibold">{counts.High} High</span>
-              <span className="px-3 py-1.5 rounded-full bg-usc-coral/15 text-usc-coral text-sm font-semibold">{counts.Medium} Medium</span>
-              <span className="px-3 py-1.5 rounded-full bg-usc-gold-wash text-usc-gold-dark text-sm font-semibold">{counts.Low} Low</span>
+      <section className="usc-card overflow-hidden dark:bg-[#252220]">
+        <div className="p-6 sm:p-8 bg-usc-coral-wash dark:bg-usc-coral/10">
+          <div className="flex items-start gap-4">
+            <div className="w-12 h-12 rounded-2xl bg-white dark:bg-[#2A2724] flex items-center justify-center shrink-0">
+              <ShieldAlert size={26} className="text-usc-coral" />
+            </div>
+            <div>
+              <h1 className="text-2xl sm:text-3xl font-extrabold text-usc-black dark:text-[#F5F0E8]">
+                Venue overlaps
+              </h1>
+              <p className="text-usc-muted dark:text-white/55 text-sm mt-2 max-w-xl leading-relaxed">
+                When two <em>different</em> orgs book the same physical venue on the same day. Online, TBA/TBD, and same-org events are ignored — {conflicts.length} found.
+              </p>
+              <div className="flex flex-wrap gap-2 mt-4">
+                <span className="usc-pill bg-white dark:bg-[#2A2724] text-usc-coral border border-usc-coral/20">{counts.High} high priority</span>
+                <span className="usc-pill bg-white dark:bg-[#2A2724] text-usc-charcoal dark:text-white/70 border border-usc-border">{counts.Medium} medium</span>
+                <span className="usc-pill bg-white dark:bg-[#2A2724] text-usc-gold-dark dark:text-usc-gold border border-usc-gold/25">{counts.Low} low</span>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      <div className="flex gap-2 flex-wrap">
+      <div className="flex gap-2 flex-wrap items-center">
         {(['all', 'High', 'Medium', 'Low'] as const).map((f) => (
           <button
             key={f}
             onClick={() => setFilter(f)}
-            className={`px-4 py-2.5 rounded-xl text-sm font-bold transition ${
+            className={`px-4 py-2 rounded-full text-sm font-bold transition ${
               filter === f
-                ? 'bg-usc-black text-[#F5F3F0] shadow-sm'
-                : 'bg-white dark:bg-[#2A2724] border border-usc-border dark:border-[#3D3935] text-usc-ink dark:text-[#E8E4DF] hover:bg-usc-warm dark:hover:bg-[#332F2C]'
+                ? 'bg-usc-gold text-usc-black'
+                : 'bg-white dark:bg-[#252220] border border-usc-border text-usc-ink dark:text-[#F2EDE6] hover:bg-usc-gold-wash'
             }`}
           >
             {f === 'all' ? `All (${conflicts.length})` : `${f} (${counts[f]})`}
           </button>
         ))}
-        <Link to="/calendar" className="ml-auto px-4 py-2.5 rounded-xl text-sm font-bold text-usc-black dark:text-usc-gold border border-usc-gold hover:bg-amber-50 dark:hover:bg-amber-950/20">
-          View Calendar →
+        <Link to="/calendar" className="ml-auto px-4 py-2 rounded-full text-sm font-bold text-usc-gold-dark dark:text-usc-gold border border-usc-gold/40 hover:bg-usc-gold-wash">
+          Back to calendar
         </Link>
       </div>
 

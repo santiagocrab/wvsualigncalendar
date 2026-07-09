@@ -15,40 +15,41 @@ export default function OrganizationsPage() {
   }, [stats, query]);
 
   return (
-    <div className="max-w-6xl mx-auto space-y-6">
-      <div className="rounded-2xl bg-gradient-to-br from-usc-black to-usc-charcoal p-8 text-white shadow-2xl border border-usc-gold/30">
-        <div className="flex items-start gap-4">
-          <div className="w-14 h-14 rounded-2xl bg-usc-gold flex items-center justify-center shrink-0">
-            <Building2 size={28} className="text-usc-black" />
+    <div className="max-w-6xl mx-auto space-y-5">
+      <section className="usc-card overflow-hidden dark:bg-[#252220]">
+        <div className="p-6 sm:p-8 bg-gradient-to-r from-usc-gold-wash to-usc-lavender-wash dark:from-usc-gold/10 dark:to-usc-lavender/10">
+          <div className="flex items-start gap-4">
+            <div className="w-12 h-12 rounded-2xl bg-usc-gold flex items-center justify-center shrink-0 rotate-3">
+              <Building2 size={24} className="text-usc-black" />
+            </div>
+            <div className="flex-1">
+              <h1 className="text-2xl sm:text-3xl font-extrabold text-usc-black dark:text-[#F5F0E8]">All organizations</h1>
+              <p className="text-usc-muted dark:text-white/55 text-sm mt-2 leading-relaxed max-w-xl">
+                {organizations.length} councils & student orgs on the USC list. Tap yours to see your schedule.
+              </p>
+            </div>
           </div>
-          <div className="flex-1">
-            <p className="text-usc-gold text-xs font-bold uppercase tracking-widest">Featured Directory</p>
-            <h1 className="text-3xl font-extrabold mt-1">Organizations & Councils</h1>
-            <p className="text-white/80 text-sm mt-2 leading-relaxed">
-              {organizations.length} official councils and student organizations for AY 2026–2027 (USC master list).
-            </p>
+          <div className="mt-5 relative max-w-md">
+            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-usc-muted" size={18} />
+            <input
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Find your org…"
+              className="w-full pl-10 pr-4 py-3 rounded-full text-usc-ink font-medium text-sm border border-usc-border bg-white dark:bg-[#2A2724] dark:text-[#F2EDE6] focus:outline-none focus:ring-2 focus:ring-usc-gold/30"
+            />
           </div>
         </div>
-        <div className="mt-6 relative max-w-md">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
-          <input
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search organization name..."
-            className="w-full pl-10 pr-4 py-3 rounded-xl text-gray-900 font-medium text-sm border-0 shadow-lg focus:outline-none focus:ring-2 focus:ring-usc-gold"
-          />
-        </div>
-      </div>
+      </section>
 
-      <p className="text-sm font-semibold text-gray-700 dark:text-gray-300">
-        Showing {filtered.length} of {organizations.length} organizations
+      <p className="text-sm font-medium text-usc-muted dark:text-white/45 px-1">
+        Showing {filtered.length} of {organizations.length}
       </p>
 
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {filtered.map((org) => <OrganizationCard key={org.name} org={org} />)}
       </div>
       {filtered.length === 0 && (
-        <p className="text-center text-gray-500 py-12 font-medium">No organizations match your search.</p>
+        <p className="text-center text-usc-muted py-12 font-medium">No match — try a shorter name or acronym.</p>
       )}
     </div>
   );

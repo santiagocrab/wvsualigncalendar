@@ -33,7 +33,7 @@ export function EventModal({ event, onClose }: Props) {
         className="bg-white dark:bg-[#2A2724] rounded-2xl shadow-xl max-w-lg w-full max-h-[90vh] overflow-y-auto border border-usc-border dark:border-[#3D3935]"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="bg-usc-surface text-[#F0EDE8] p-6 rounded-t-2xl relative">
+        <div className="bg-usc-gold-wash dark:bg-usc-gold/15 text-usc-black dark:text-[#F5F0E8] p-6 rounded-t-2xl relative border-b border-usc-gold/20">
           <button onClick={onClose} className="absolute top-4 right-4 p-1.5 rounded-lg hover:bg-white/10" aria-label="Close">
             <X size={20} />
           </button>
@@ -42,7 +42,7 @@ export function EventModal({ event, onClose }: Props) {
             <StatusBadge status={event.status} />
           </div>
           <h2 className="text-xl font-extrabold pr-8 leading-snug">{event.title}</h2>
-          <p className="text-usc-gold-light text-sm mt-2 font-medium">Hosted by: {event.host}</p>
+          <p className="text-usc-gold-dark dark:text-usc-gold text-sm mt-2 font-medium">Hosted by: {event.host}</p>
         </div>
 
         <div className="p-6 space-y-4">
@@ -126,7 +126,7 @@ export function EventModal({ event, onClose }: Props) {
           <div className="flex gap-2 pt-3 border-t border-gray-200 dark:border-slate-700">
             <button
               onClick={handleCopy}
-              className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-usc-black text-[#F5F3F0] text-sm font-semibold hover:bg-usc-charcoal transition"
+              className="flex items-center gap-2 px-4 py-2.5 rounded-full bg-usc-gold text-usc-black text-sm font-bold hover:bg-usc-gold-dark hover:text-white transition"
             >
               <Copy size={14} /> {copied ? 'Copied!' : 'Copy Details'}
             </button>

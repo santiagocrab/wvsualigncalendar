@@ -48,9 +48,9 @@ export function CalendarGrid({ view, currentDate, onDateChange, onEventClick, on
   const maxShow = compactView ? 2 : 4;
 
   return (
-    <div className="bg-white dark:bg-[#2A2724] rounded-2xl shadow-sm border border-usc-border dark:border-[#3D3935] overflow-hidden">
-      <div className="flex items-center justify-between px-6 py-4 border-b border-usc-border dark:border-[#3D3935] bg-usc-warm dark:bg-[#332F2C]/50">
-        <h2 className="text-xl font-bold text-usc-black dark:text-[#F0EDE8]">
+    <div className="usc-card overflow-hidden dark:bg-[#252220]">
+      <div className="flex items-center justify-between px-5 sm:px-6 py-4 border-b border-usc-border dark:border-[#3D3935] bg-usc-warm dark:bg-[#2A2724]/50">
+        <h2 className="text-xl font-extrabold text-usc-black dark:text-[#F5F0E8]">
           {view === 'month'
             ? format(currentDate, 'MMMM yyyy')
             : `Week of ${format(days[0], 'MMM d, yyyy')}`}

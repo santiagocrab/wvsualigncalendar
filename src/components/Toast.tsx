@@ -1,15 +1,13 @@
-import { AlertCircle } from 'lucide-react';
+import { Info } from 'lucide-react';
 
 export function NoticeBanner() {
   return (
-    <div className="bg-usc-gold-wash dark:bg-usc-gold/8 border border-usc-gold/25 rounded-2xl px-5 py-4 flex items-start gap-3">
-      <AlertCircle className="text-usc-gold-dark shrink-0 mt-0.5" size={20} />
-      <div>
-        <p className="text-sm font-semibold text-usc-black dark:text-[#F0EDE8]">Official USC Notice</p>
-        <p className="text-sm text-usc-muted dark:text-white/55 mt-1 leading-relaxed">
-          Proposed events are subject for approval and may change. This is a read-only publication of the unified calendar for Academic Year 2026–2027.
-        </p>
-      </div>
+    <div className="flex items-start gap-3 px-4 py-3.5 rounded-2xl bg-usc-sky-wash dark:bg-usc-sky/10 border border-usc-sky/20">
+      <Info className="text-usc-sky shrink-0 mt-0.5" size={18} />
+      <p className="text-sm text-usc-charcoal dark:text-white/70 leading-relaxed">
+        <span className="font-semibold text-usc-black dark:text-[#F5F0E8]">Heads up:</span>{' '}
+        green & proposed events still need USC approval — dates can shift. This calendar is for planning together, not final posting yet.
+      </p>
     </div>
   );
 }

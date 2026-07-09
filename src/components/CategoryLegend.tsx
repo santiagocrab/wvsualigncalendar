@@ -35,10 +35,10 @@ export function CategoryLegend({ compact }: { compact?: boolean }) {
       {(Object.keys(CATEGORY_META) as EventCategory[]).map((cat) => {
         const m = CATEGORY_META[cat];
         return (
-          <div key={cat} className="flex items-center gap-2 text-sm font-semibold">
-            <span className="w-4 h-4 rounded shrink-0 shadow-sm" style={{ backgroundColor: m.color }} />
-            {!compact && <span className="text-usc-black dark:text-[#F0EDE8]">{cat}</span>}
-            {compact && <span className="text-xs text-usc-black dark:text-[#F0EDE8]">{m.short}</span>}
+          <div key={cat} className="flex items-center gap-2 text-sm">
+            <span className="w-3.5 h-3.5 rounded-md shrink-0" style={{ backgroundColor: m.color }} />
+            {!compact && <span className="text-usc-black dark:text-[#F5F0E8] font-medium">{cat}</span>}
+            {compact && <span className="text-xs text-usc-black dark:text-[#F5F0E8] font-semibold">{m.short}</span>}
           </div>
         );
       })}

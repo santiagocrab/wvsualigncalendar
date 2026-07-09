@@ -26,13 +26,13 @@ export function DayEventsModal({ date, events, onClose, onEventClick }: Props) {
         className="bg-white dark:bg-[#2A2724] rounded-2xl shadow-xl max-w-lg w-full max-h-[85vh] flex flex-col border border-usc-border dark:border-[#3D3935]"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="bg-usc-surface text-[#F0EDE8] px-6 py-4 rounded-t-2xl flex items-center justify-between shrink-0">
+        <div className="bg-usc-gold-wash dark:bg-usc-gold/15 text-usc-black dark:text-[#F5F0E8] px-6 py-4 rounded-t-2xl flex items-center justify-between shrink-0 border-b border-usc-gold/20">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-usc-gold/20 flex items-center justify-center">
-              <CalIcon size={20} className="text-usc-gold-light" />
+            <div className="w-10 h-10 rounded-xl bg-usc-gold flex items-center justify-center">
+              <CalIcon size={20} className="text-usc-black" />
             </div>
             <div>
-              <p className="text-usc-gold-light text-xs font-semibold uppercase tracking-wide">Events on</p>
+              <p className="text-xs font-semibold text-usc-gold-dark dark:text-usc-gold">Events on</p>
               <h2 className="text-lg font-bold">{format(date, 'EEEE, MMMM d, yyyy')}</h2>
             </div>
           </div>
@@ -79,7 +79,7 @@ export function DayEventsModal({ date, events, onClose, onEventClick }: Props) {
         <div className="px-4 py-3 border-t border-usc-border dark:border-[#3D3935] shrink-0">
           <button
             onClick={onClose}
-            className="w-full py-2.5 rounded-xl bg-usc-black text-[#F5F3F0] text-sm font-semibold hover:bg-usc-charcoal"
+            className="w-full py-2.5 rounded-full bg-usc-gold text-usc-black text-sm font-bold hover:bg-usc-gold-dark hover:text-white"
           >
             Close
           </button>

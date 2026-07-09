@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Calendar, AlertTriangle, TrendingUp, Clock, Heart, Building2 } from 'lucide-react';
+import { Calendar, AlertTriangle, Building2, Sparkles, CalendarDays } from 'lucide-react';
 import { useMemo } from 'react';
 import { useEvents } from '../context/EventsContext';
 import { CategoryLegend } from '../components/CategoryLegend';
@@ -8,6 +8,7 @@ import { EventListCard } from '../components/EventCard';
 import { format, parseISO, addDays } from 'date-fns';
 import { CATEGORY_META } from '../data/categories';
 import type { EventCategory } from '../types/event';
+import { cn } from '../lib/utils';
 
 export default function DashboardPage() {
   const { events, conflicts, organizations } = useEvents();
@@ -17,7 +18,6 @@ export default function DashboardPage() {
 
   const stats = useMemo(() => ({
     total: events.length,
-    needsApproval: events.filter((e) => ['Proposed', 'Pending Approval'].includes(e.status)).length,
     conflictCount: conflicts.length,
     highConflicts: conflicts.filter((c) => c.severity === 'High').length,
     outreach: events.filter((e) => e.category === 'Org/CSC Outreach Programs').length,
@@ -30,116 +30,103 @@ export default function DashboardPage() {
     return Object.entries(c).sort((a, b) => b[1] - a[1]).slice(0, 5);
   }, [events]);
 
-  const cards = [
-    { label: 'Total Events', value: stats.total, icon: Calendar, color: 'bg-usc-black/90', iconColor: 'text-white' },
-    { label: 'Organizations', value: organizations.length, icon: Building2, color: 'bg-usc-gold-wash', iconColor: 'text-usc-gold-dark' },
-    { label: 'Conflicts', value: stats.conflictCount, icon: AlertTriangle, color: 'bg-usc-rose-wash', iconColor: 'text-usc-rose' },
-    { label: 'Outreach Programs', value: stats.outreach, icon: Heart, color: 'bg-usc-plum-wash', iconColor: 'text-usc-plum' },
+  const chips = [
+    { label: 'Events', value: stats.total, bg: 'bg-usc-sky-wash dark:bg-usc-sky/15', border: 'border-usc-sky/25', text: 'text-usc-sky' },
+    { label: 'Organizations', value: organizations.length, bg: 'bg-usc-gold-wash dark:bg-usc-gold/15', border: 'border-usc-gold/30', text: 'text-usc-gold-dark dark:text-usc-gold' },
+    { label: 'Venue conflicts', value: stats.conflictCount, bg: 'bg-usc-coral-wash dark:bg-usc-coral/15', border: 'border-usc-coral/25', text: 'text-usc-coral' },
+    { label: 'Outreach', value: stats.outreach, bg: 'bg-usc-lavender-wash dark:bg-usc-lavender/15', border: 'border-usc-lavender/25', text: 'text-usc-lavender' },
   ];
 
   return (
-    <div className="space-y-6 max-w-7xl mx-auto">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <div>
-          <h1 className="font-display text-2xl font-bold text-usc-black dark:text-white">USC Unified Calendar Dashboard</h1>
-          <p className="text-usc-muted dark:text-white/50 text-sm mt-1 font-medium">
-            {format(today, 'EEEE, MMMM d, yyyy')} · Academic Year 2026–2027 · Read-only
-          </p>
+    <div className="space-y-6 max-w-6xl mx-auto">
+      {/* Welcome hero */}
+      <section className="usc-card overflow-hidden dark:bg-[#252220]">
+        <div className="relative p-6 sm:p-8 bg-gradient-to-br from-usc-gold-wash via-white to-usc-sky-wash dark:from-usc-gold/10 dark:via-[#252220] dark:to-usc-sky/10">
+          <div className="flex flex-col sm:flex-row items-center gap-6">
+            <img src="/usc.jpg" alt="USC" className="w-24 h-24 rounded-2xl object-cover usc-gold-ring shrink-0 rotate-[-2deg]" />
+            <div className="text-center sm:text-left flex-1">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/80 dark:bg-white/10 border border-usc-gold/30 text-xs font-semibold text-usc-gold-dark dark:text-usc-gold mb-3">
+                <Sparkles size={12} /> Shared with all WVSU orgs
+              </div>
+              <h1 className="text-2xl sm:text-3xl font-extrabold text-usc-black dark:text-[#F5F0E8] leading-tight">
+                Hey orgs — here&apos;s everyone&apos;s calendar
+              </h1>
+              <p className="text-usc-muted dark:text-white/55 text-sm sm:text-base mt-2 max-w-xl leading-relaxed">
+                {organizations.length} organizations · {stats.total} activities · AY 2026–2027.
+                Find your events, check venue overlaps, and see what&apos;s coming up.
+              </p>
+              <div className="flex flex-wrap gap-2 mt-5 justify-center sm:justify-start">
+                <Link to="/calendar" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-usc-gold text-usc-black text-sm font-bold hover:bg-usc-gold-dark hover:text-white transition shadow-sm">
+                  <Calendar size={16} /> Open calendar
+                </Link>
+                <Link to="/organizations" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white dark:bg-[#2A2724] text-usc-ink dark:text-[#F2EDE6] text-sm font-bold border border-usc-border hover:border-usc-gold transition">
+                  <Building2 size={16} /> Browse orgs
+                </Link>
+              </div>
+            </div>
+          </div>
         </div>
-        <div className="flex flex-wrap gap-2">
-          <Link to="/calendar" className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-usc-black text-[#F5F3F0] text-sm font-semibold shadow-sm hover:bg-usc-charcoal transition">
-            <Calendar size={16} /> View Calendar
-          </Link>
-          <Link to="/conflicts" className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-usc-rose-wash text-usc-rose border border-usc-rose/20 text-sm font-semibold hover:bg-usc-rose/10 transition">
-            <AlertTriangle size={16} /> Conflict Checker ({stats.highConflicts} high)
-          </Link>
-          <Link to="/organizations" className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-usc-gold-wash text-usc-gold-dark border border-usc-gold/25 text-sm font-semibold hover:bg-usc-gold/10 transition">
-            <Building2 size={16} /> Organizations ({organizations.length})
-          </Link>
-        </div>
-      </div>
+      </section>
 
       <NoticeBanner />
 
-      {/* USC brand hero */}
-      <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-usc-surface to-usc-charcoal text-[#F0EDE8] p-6 lg:p-8 border border-usc-border/30 shadow-sm">
-        <div className="usc-ray-bar absolute top-0 left-0 right-0" />
-        <div className="flex flex-col sm:flex-row items-center gap-6 pt-2">
-          <img src="/usc.jpg" alt="USC Seal" className="w-20 h-20 rounded-full object-cover usc-gold-ring shrink-0" />
-          <div className="text-center sm:text-left">
-            <p className="text-usc-gold-light text-xs font-semibold uppercase tracking-[0.25em]">West Visayas State University</p>
-            <h2 className="font-display text-xl lg:text-2xl font-bold mt-1">University Student Council</h2>
-            <p className="text-white/60 text-sm mt-2 max-w-xl">Official unified calendar for Academic Year 2026–2027 — all councils, organizations, and USC activities in one place.</p>
-          </div>
-        </div>
-      </div>
-
-      {/* Featured callouts */}
-      <div className="grid md:grid-cols-2 gap-4">
-        <Link to="/conflicts" className="group block rounded-2xl p-6 bg-usc-rose-wash dark:bg-usc-rose/10 border border-usc-rose/20 shadow-sm hover:shadow-md hover:border-usc-rose/35 transition">
-          <div className="flex items-start justify-between">
-            <div>
-              <p className="text-usc-rose/80 text-xs font-semibold uppercase tracking-widest">Featured Tool</p>
-              <h2 className="text-xl font-bold text-usc-black dark:text-[#F0EDE8] mt-1">Conflict Checker</h2>
-              <p className="text-usc-muted dark:text-white/55 text-sm mt-2 leading-relaxed">
-                {stats.conflictCount} same-venue clashes — {stats.highConflicts} at high-traffic venues.
-              </p>
-            </div>
-            <AlertTriangle size={36} className="text-usc-rose/70 group-hover:scale-105 transition" />
-          </div>
-        </Link>
-        <Link to="/organizations" className="group block rounded-2xl p-6 bg-usc-gold-wash dark:bg-usc-gold/8 border border-usc-gold/25 shadow-sm hover:shadow-md hover:border-usc-gold/40 transition">
-          <div className="flex items-start justify-between">
-            <div>
-              <p className="text-usc-gold-dark text-xs font-semibold uppercase tracking-widest">Featured Directory</p>
-              <h2 className="text-xl font-bold text-usc-black dark:text-[#F0EDE8] mt-1">All Organizations</h2>
-              <p className="text-usc-muted dark:text-white/55 text-sm mt-2 leading-relaxed">
-                Browse {organizations.length} councils and student organizations with their scheduled activities.
-              </p>
-            </div>
-            <Building2 size={36} className="text-usc-gold-dark group-hover:scale-105 transition" />
-          </div>
-        </Link>
-      </div>
-
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        {cards.map(({ label, value, icon: Icon, color, iconColor }) => (
-          <div key={label} className="bg-white dark:bg-[#2A2724] rounded-2xl p-5 shadow-sm border border-usc-border dark:border-[#3D3935]">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-xs text-usc-muted uppercase tracking-wide font-medium">{label}</p>
-                <p className="text-3xl font-bold text-usc-black dark:text-[#F0EDE8] mt-1">{value}</p>
-              </div>
-              <div className={`w-12 h-12 rounded-xl ${color} flex items-center justify-center`}>
-                <Icon size={22} className={iconColor} />
-              </div>
-            </div>
+      {/* Quick stats */}
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+        {chips.map(({ label, value, bg, border, text }) => (
+          <div key={label} className={cn('usc-stat-chip border', bg, border)}>
+            <p className={`text-2xl sm:text-3xl font-extrabold ${text}`}>{value}</p>
+            <p className="text-xs font-semibold text-usc-muted dark:text-white/50 mt-1">{label}</p>
           </div>
         ))}
       </div>
 
-      <div className="grid lg:grid-cols-3 gap-6">
-        <div className="lg:col-span-2 bg-white dark:bg-[#2A2724] rounded-2xl p-6 shadow-sm border border-usc-border dark:border-[#3D3935]">
-          <h2 className="font-bold text-usc-black dark:text-white flex items-center gap-2">
-            <TrendingUp size={18} className="text-usc-gold" /> Category Summary
-          </h2>
-          <div className="grid sm:grid-cols-2 gap-3 mt-4">
+      {/* Quick links */}
+      <div className="grid sm:grid-cols-2 gap-4">
+        <Link to="/conflicts" className="usc-card p-5 hover:border-usc-coral/40 transition group dark:bg-[#252220]">
+          <div className="flex items-start gap-4">
+            <div className="w-11 h-11 rounded-2xl bg-usc-coral-wash dark:bg-usc-coral/20 flex items-center justify-center shrink-0 group-hover:scale-105 transition">
+              <AlertTriangle size={22} className="text-usc-coral" />
+            </div>
+            <div>
+              <h2 className="font-bold text-usc-black dark:text-[#F5F0E8]">Venue conflict checker</h2>
+              <p className="text-sm text-usc-muted dark:text-white/50 mt-1 leading-relaxed">
+                {stats.conflictCount} cross-org overlaps found · {stats.highConflicts} at busy venues like COM Gym
+              </p>
+            </div>
+          </div>
+        </Link>
+        <Link to="/calendar" className="usc-card p-5 hover:border-usc-gold/50 transition group dark:bg-[#252220]">
+          <div className="flex items-start gap-4">
+            <div className="w-11 h-11 rounded-2xl bg-usc-gold-wash dark:bg-usc-gold/20 flex items-center justify-center shrink-0 group-hover:scale-105 transition">
+              <CalendarDays size={22} className="text-usc-gold-dark dark:text-usc-gold" />
+            </div>
+            <div>
+              <h2 className="font-bold text-usc-black dark:text-[#F5F0E8]">Month & week view</h2>
+              <p className="text-sm text-usc-muted dark:text-white/50 mt-1 leading-relaxed">
+                Tap any date to see all events that day. Jump between AY months in one click.
+              </p>
+            </div>
+          </div>
+        </Link>
+      </div>
+
+      <div className="grid lg:grid-cols-3 gap-5">
+        <div className="lg:col-span-2 usc-card p-5 sm:p-6 dark:bg-[#252220]">
+          <h2 className="font-bold text-usc-black dark:text-[#F5F0E8] text-lg">Events by category</h2>
+          <p className="text-xs text-usc-muted dark:text-white/45 mt-0.5 mb-4">Color key for the calendar</p>
+          <div className="grid sm:grid-cols-2 gap-2.5">
             {(Object.keys(CATEGORY_META) as EventCategory[]).map((cat) => {
               const count = events.filter((e) => e.category === cat).length;
               const m = CATEGORY_META[cat];
               return (
                 <div
                   key={cat}
-                  className="flex items-center gap-3 p-3 rounded-xl border border-usc-border dark:border-[#4A4541] bg-white dark:bg-[#332F2C]"
+                  className="flex items-center gap-3 p-3 rounded-xl bg-usc-warm dark:bg-[#2A2724] border border-usc-border/80 dark:border-[#3D3833]"
                 >
-                  <span className="w-3 h-8 rounded-full shrink-0" style={{ backgroundColor: m.color }} />
+                  <span className="w-2.5 h-10 rounded-full shrink-0" style={{ backgroundColor: m.color }} />
                   <div className="min-w-0 flex-1">
-                    <p className="text-xs font-semibold text-usc-black dark:text-[#F0EDE8] leading-snug line-clamp-2">
-                      {cat}
-                    </p>
-                    <p className="text-xl font-bold mt-0.5" style={{ color: m.countColor }}>
-                      {count}
-                    </p>
+                    <p className="text-xs font-semibold text-usc-black dark:text-[#F5F0E8] leading-snug">{cat}</p>
+                    <p className="text-lg font-extrabold mt-0.5" style={{ color: m.countColor }}>{count}</p>
                   </div>
                 </div>
               );
@@ -147,34 +134,37 @@ export default function DashboardPage() {
           </div>
         </div>
 
-        <div className="bg-white dark:bg-[#2A2724] rounded-2xl p-6 shadow-sm border border-usc-border dark:border-[#3D3935]">
-          <h2 className="font-bold text-usc-black dark:text-white">Busiest Dates</h2>
-          <div className="mt-4 space-y-2">
-            {byDate.map(([d, count]) => (
-              <div key={d} className="flex items-center justify-between text-sm">
-                <span className="text-gray-700 dark:text-gray-300 font-medium">{format(parseISO(d), 'MMM d, yyyy')}</span>
-                <span className="font-extrabold text-usc-black dark:text-white">{count} events</span>
+        <div className="usc-card p-5 sm:p-6 dark:bg-[#252220]">
+          <h2 className="font-bold text-usc-black dark:text-[#F5F0E8] text-lg">Busiest days</h2>
+          <div className="mt-4 space-y-3">
+            {byDate.map(([d, count], i) => (
+              <div key={d} className="flex items-center gap-3">
+                <span className="w-7 h-7 rounded-full bg-usc-gold-wash dark:bg-usc-gold/15 text-usc-gold-dark dark:text-usc-gold text-xs font-bold flex items-center justify-center shrink-0">
+                  {i + 1}
+                </span>
+                <span className="text-sm text-usc-charcoal dark:text-white/70 flex-1">{format(parseISO(d), 'MMM d, yyyy')}</span>
+                <span className="text-sm font-bold text-usc-black dark:text-[#F5F0E8]">{count}</span>
               </div>
             ))}
           </div>
         </div>
       </div>
 
-      <div className="grid lg:grid-cols-2 gap-6">
+      <div className="grid lg:grid-cols-2 gap-5">
         <div>
-          <h2 className="font-bold text-usc-black dark:text-white mb-3">Upcoming This Week</h2>
-          <div className="space-y-3">
+          <h2 className="font-bold text-usc-black dark:text-[#F5F0E8] mb-3">This week</h2>
+          <div className="space-y-2.5">
             {stats.thisWeek.slice(0, 5).map((e) => (
               <EventListCard key={e.id} event={e} onClick={() => {}} />
             ))}
-            {stats.thisWeek.length === 0 && <p className="text-gray-500 text-sm font-medium">No events this week.</p>}
+            {stats.thisWeek.length === 0 && (
+              <p className="text-usc-muted text-sm font-medium py-6 text-center usc-card dark:bg-[#252220]">Nothing scheduled this week yet.</p>
+            )}
           </div>
         </div>
         <div>
-          <h2 className="font-bold text-usc-black dark:text-white mb-3 flex items-center gap-2">
-            <Clock size={16} /> Pending USC Review
-          </h2>
-          <div className="space-y-3">
+          <h2 className="font-bold text-usc-black dark:text-[#F5F0E8] mb-3">Waiting on USC approval</h2>
+          <div className="space-y-2.5">
             {events.filter((e) => e.status === 'Proposed' || e.status === 'Pending Approval').slice(0, 5).map((e) => (
               <EventListCard key={e.id} event={e} onClick={() => {}} />
             ))}
@@ -182,7 +172,7 @@ export default function DashboardPage() {
         </div>
       </div>
 
-      <div className="bg-white dark:bg-[#2A2724] rounded-2xl p-5 shadow-sm border border-usc-border dark:border-[#3D3935]">
+      <div className="usc-card p-5 dark:bg-[#252220]">
         <CategoryLegend />
       </div>
     </div>
