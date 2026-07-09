@@ -66,9 +66,9 @@ export default function SettingsPage() {
         </div>
       </div>
 
-      <div className="bg-usc-surface text-[#F0EDE8] rounded-2xl p-6 border border-usc-border/30">
-        <h2 className="font-bold text-usc-gold-light">USC Reminders</h2>
-        <ul className="mt-3 space-y-2 text-sm text-white/75 list-disc list-inside leading-relaxed">
+      <div className="rounded-2xl p-6 border border-usc-gold/30 bg-usc-gold-wash dark:bg-[#1F1D1B] dark:border-usc-gold/20">
+        <h2 className="font-bold text-usc-gold-dark dark:text-usc-gold">USC Reminders</h2>
+        <ul className="mt-3 space-y-2 text-sm text-usc-charcoal dark:text-[#F5F0E8]/85 list-disc list-inside leading-relaxed">
           <li>Organizations are discouraged from scheduling on-campus events Friday–Sunday (MC 114).</li>
           <li>Avoid major activities during WVSU examination periods.</li>
           <li>Coordinate high-traffic venues (COM Gym, Cultural Center, PESCAR) with OSA.</li>

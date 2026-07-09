@@ -1,6 +1,6 @@
 import { useState, useMemo, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { List, LayoutGrid, Columns } from 'lucide-react';
+import { List, LayoutGrid, Columns, MapPin, Monitor } from 'lucide-react';
 import { useEvents, AY_MONTHS } from '../context/EventsContext';
 import { CalendarGrid } from '../components/CalendarGrid';
 import { DayEventsModal } from '../components/DayEventsModal';
@@ -8,9 +8,10 @@ import { EventModal } from '../components/EventModal';
 import { EventListCard } from '../components/EventCard';
 import { CategoryLegend } from '../components/CategoryLegend';
 import { NoticeBanner } from '../components/Toast';
-import type { CalendarEvent, CalendarView } from '../types/event';
+import type { CalendarEvent, CalendarView, ModalityFilter } from '../types/event';
 import { cn, format } from '../lib/utils';
 import { CATEGORIES } from '../data/categories';
+import { getEventModality, matchesModalityFilter } from '../lib/venue';
 
 const VIEWS: { id: CalendarView; label: string; icon: typeof LayoutGrid }[] = [
   { id: 'month', label: 'Month', icon: LayoutGrid },
@@ -18,11 +19,44 @@ const VIEWS: { id: CalendarView; label: string; icon: typeof LayoutGrid }[] = [
   { id: 'list', label: 'List', icon: List },
 ];
 
+const MODALITY_FILTERS: { id: ModalityFilter; label: string; icon: typeof MapPin }[] = [
+  { id: 'all', label: 'All activities', icon: List },
+  { id: 'face-to-face', label: 'Face-to-face', icon: MapPin },
+  { id: 'online', label: 'Online', icon: Monitor },
+];
+
+const LIST_SECTIONS: {
+  key: string;
+  title: string;
+  description: string;
+  match: (event: CalendarEvent) => boolean;
+}[] = [
+  {
+    key: 'face-to-face',
+    title: 'Face-to-face activities',
+    description: 'On-campus and physical venues',
+    match: (e) => getEventModality(e) === 'face-to-face',
+  },
+  {
+    key: 'online',
+    title: 'Online activities',
+    description: 'Virtual, Zoom, Google Meet, and similar',
+    match: (e) => getEventModality(e) === 'online',
+  },
+  {
+    key: 'hybrid',
+    title: 'Hybrid activities',
+    description: 'Can run on-campus or online (e.g. WVSU or Online)',
+    match: (e) => getEventModality(e) === 'hybrid',
+  },
+];
+
 export default function CalendarPage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const {
-    filteredEvents, conflicts, categoryFilter, setCategoryFilter,
+    filteredEvents, events, conflicts, categoryFilter, setCategoryFilter,
     orgFilter, setOrgFilter, venueFilter, setVenueFilter,
+    modalityFilter, setModalityFilter,
     organizations, venues, compactView, toggleCompactView,
     calendarView, setCalendarView, calendarDate, setCalendarDate,
   } = useEvents();
@@ -59,6 +93,43 @@ export default function CalendarPage() {
     [filteredEvents]
   );
 
+  const modalityCounts = useMemo(() => {
+    const base = events.filter((e) => {
+      if (categoryFilter !== 'all' && e.category !== categoryFilter) return false;
+      if (orgFilter !== 'all' && e.organization !== orgFilter && e.host !== orgFilter) return false;
+      if (venueFilter !== 'all' && e.location !== venueFilter) return false;
+      return true;
+    });
+    return {
+      all: base.length,
+      'face-to-face': base.filter((e) => matchesModalityFilter(e, 'face-to-face')).length,
+      online: base.filter((e) => matchesModalityFilter(e, 'online')).length,
+    };
+  }, [events, categoryFilter, orgFilter, venueFilter]);
+
+  const listSections = useMemo(() => {
+    if (modalityFilter !== 'all') {
+      return [{ key: modalityFilter, title: '', description: '', items: sorted }];
+    }
+    const sections = LIST_SECTIONS.map((section) => ({
+      key: section.key,
+      title: section.title,
+      description: section.description,
+      items: sorted.filter(section.match),
+    })).filter((section) => section.items.length > 0);
+
+    const venueTba = sorted.filter((e) => getEventModality(e) === 'undetermined');
+    if (venueTba.length > 0) {
+      sections.push({
+        key: 'undetermined',
+        title: 'Venue not yet confirmed',
+        description: 'Activities with TBA/TBD locations',
+        items: venueTba,
+      });
+    }
+    return sections;
+  }, [modalityFilter, sorted]);
+
   const selectClass = 'px-3 py-2.5 rounded-xl border border-gray-300 dark:border-slate-600 text-sm font-semibold text-gray-900 dark:text-white bg-white dark:bg-slate-800';
 
   return (
@@ -66,7 +137,7 @@ export default function CalendarPage() {
       <div>
         <h1 className="text-2xl font-bold text-usc-black dark:text-white">Unified Calendar</h1>
         <p className="text-gray-600 dark:text-gray-400 text-sm mt-1 font-medium">
-          Academic Year 2026–2027 · Toggle month, week, or list view below
+          Academic Year 2026–2027 · Filter face-to-face vs online below
         </p>
       </div>
 
@@ -95,6 +166,31 @@ export default function CalendarPage() {
           <span className="text-sm font-bold text-gray-700 dark:text-gray-300">
             {filteredEvents.length} events shown
           </span>
+        </div>
+
+        <div className="flex flex-wrap gap-2 items-center">
+          <span className="text-xs font-bold text-gray-600 dark:text-gray-400 mr-1">Format:</span>
+          {MODALITY_FILTERS.map(({ id, label, icon: Icon }) => (
+            <button
+              key={id}
+              onClick={() => setModalityFilter(id)}
+              className={cn(
+                'inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-bold transition border',
+                modalityFilter === id
+                  ? 'bg-usc-gold text-usc-black border-usc-gold shadow-sm'
+                  : 'bg-white dark:bg-slate-800 text-gray-800 dark:text-gray-200 border-gray-300 dark:border-slate-600 hover:border-usc-gold/50',
+              )}
+            >
+              <Icon size={15} />
+              {label}
+              <span className={cn(
+                'text-[11px] font-extrabold px-1.5 py-0.5 rounded-full',
+                modalityFilter === id ? 'bg-usc-black/10' : 'bg-gray-100 dark:bg-slate-700',
+              )}>
+                {modalityCounts[id]}
+              </span>
+            </button>
+          ))}
         </div>
 
         {/* AY month quick jump */}
@@ -146,8 +242,18 @@ export default function CalendarPage() {
       <CategoryLegend compact />
 
       {calendarView === 'list' ? (
-        <div className="space-y-3">
-          {sorted.map((e) => <EventListCard key={e.id} event={e} onClick={() => setSelected(e)} />)}
+        <div className="space-y-8">
+          {listSections.map((section) => (
+            <div key={section.key} className="space-y-3">
+              {modalityFilter === 'all' && (
+                <div className="px-1">
+                  <h2 className="text-lg font-bold text-usc-black dark:text-white">{section.title}</h2>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">{section.description}</p>
+                </div>
+              )}
+              {section.items.map((e) => <EventListCard key={e.id} event={e} onClick={() => setSelected(e)} />)}
+            </div>
+          ))}
           {sorted.length === 0 && (
             <div className="text-center py-16 text-gray-500 dark:text-gray-400">
               <p className="text-lg font-semibold">No events found</p>

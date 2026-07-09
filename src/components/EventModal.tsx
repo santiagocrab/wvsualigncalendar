@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { X, MapPin, Clock, Users, User, FileText, Copy, ExternalLink, AlertTriangle } from 'lucide-react';
 import type { CalendarEvent } from '../types/event';
-import { CategoryBadge, StatusBadge } from './CategoryLegend';
+import { CategoryBadge, StatusBadge, ModalityBadge } from './CategoryLegend';
 import { formatDate, formatTimeRange, copyEventDetails } from '../lib/utils';
 import { useEvents } from '../context/EventsContext';
 import { getConflictsForEvent } from '../lib/conflicts';
@@ -40,6 +40,7 @@ export function EventModal({ event, onClose }: Props) {
           <div className="flex gap-2 mb-3 flex-wrap">
             <CategoryBadge category={event.category} />
             <StatusBadge status={event.status} />
+            <ModalityBadge event={event} small />
           </div>
           <h2 className="text-xl font-extrabold pr-8 leading-snug">{event.title}</h2>
           <p className="text-usc-gold-dark dark:text-usc-gold text-sm mt-2 font-medium">Hosted by: {event.host}</p>

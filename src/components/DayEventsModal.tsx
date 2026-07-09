@@ -1,6 +1,6 @@
 import { X, Calendar as CalIcon } from 'lucide-react';
 import type { CalendarEvent } from '../types/event';
-import { CategoryBadge } from './CategoryLegend';
+import { CategoryBadge, ModalityBadge } from './CategoryLegend';
 import { format, formatTimeRange } from '../lib/utils';
 import { MapPin, Clock } from 'lucide-react';
 
@@ -58,7 +58,10 @@ export function DayEventsModal({ date, events, onClose, onEventClick }: Props) {
               >
                 <div className="flex items-start justify-between gap-2">
                   <p className="font-bold text-usc-black dark:text-white text-sm leading-snug">{ev.title}</p>
-                  <CategoryBadge category={ev.category} small />
+                  <div className="flex flex-col items-end gap-1 shrink-0">
+                    <CategoryBadge category={ev.category} small />
+                    <ModalityBadge event={ev} small />
+                  </div>
                 </div>
                 <p className="text-xs text-gray-600 dark:text-gray-400 mt-1 font-semibold">
                   Hosted by: <span className="text-gray-800 dark:text-gray-200">{ev.host}</span>

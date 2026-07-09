@@ -1,26 +1,8 @@
 import { parseISO, eachDayOfInterval, format } from 'date-fns';
 import type { CalendarEvent, EventConflict } from '../types/event';
+import { hasTentativeDate, isOnlineVenue, isUndeterminedVenue } from './venue';
 
 const HIGH_VENUES = ['com gym', 'cultural center', 'pescar', 'med gym', 'wvsu grounds', 'wellness park'];
-
-/** Online-only venues can host multiple events at once — never flag as clashes */
-const ONLINE_KEYWORDS = [
-  'online', 'virtual', 'zoom', 'google meet', 'microsoft teams', 'ms teams',
-  'webinar', 'livestream', 'live stream', 'facebook page', 'fb live', 'youtube',
-  'online platform', 'telegram', 'discord', 'messenger', 'google classroom',
-];
-
-const PHYSICAL_INDICATORS = [
-  'gym', 'center', 'centre', 'building', 'campus', 'ground', 'hall', 'room',
-  'office', 'wvsu', 'college', 'auditorium', 'park', 'pescar', 'cultural',
-  'com ', 'faculty', 'library', 'canteen', 'stage', 'field', 'laboratory', 'lab',
-];
-
-const UNDETERMINED_VENUE_KEYWORDS = [
-  'tba', 'tbd', 'tbc',
-  'to be determined', 'to be announced', 'to be confirmed',
-  'not yet available', 'pending venue', 'venue pending',
-];
 
 function normalizeVenue(v: string) {
   return v.toLowerCase().trim().replace(/\s+/g, ' ');
@@ -28,30 +10,6 @@ function normalizeVenue(v: string) {
 
 function normalizeHost(host: string) {
   return host.toLowerCase().trim().replace(/\s+/g, ' ');
-}
-
-export function isOnlineVenue(venue: string): boolean {
-  const v = normalizeVenue(venue);
-  if (!v || isUndeterminedVenue(venue)) return false;
-  const hasOnline = ONLINE_KEYWORDS.some((kw) => v.includes(kw));
-  if (!hasOnline) return false;
-  const hasPhysical = PHYSICAL_INDICATORS.some((pi) => v.includes(pi));
-  return !hasPhysical;
-}
-
-/** TBA/TBD venues — date or place not finalized, cannot be a real clash */
-export function isUndeterminedVenue(venue: string): boolean {
-  const v = normalizeVenue(venue);
-  if (!v || v === 'n/a' || v === 'na') return true;
-  return UNDETERMINED_VENUE_KEYWORDS.some((kw) => v === kw || v.includes(kw));
-}
-
-/** Event date still marked tentative in submission text */
-export function hasTentativeDate(event: CalendarEvent): boolean {
-  const text = `${event.title} ${event.remarks} ${event.description}`.toLowerCase();
-  return (
-    /\b(tbd|tba)\b/.test(text) && /\b(date|schedul|when)\b/.test(text)
-  ) || /\btentative\s+date\b/.test(text) || /\bdate\s+(is\s+)?tentative\b/.test(text);
 }
 
 function isSameHost(a: CalendarEvent, b: CalendarEvent): boolean {
@@ -101,7 +59,6 @@ export function detectConflicts(events: CalendarEvent[]): EventConflict[] {
 
       for (let i = 0; i < venueEvents.length - 1; i++) {
         for (let j = i + 1; j < venueEvents.length; j++) {
-          // Same org/host may stack multiple activities at one venue on one day
           if (isSameHost(venueEvents[i], venueEvents[j])) continue;
 
           const displayVenue = venueEvents[i].location;

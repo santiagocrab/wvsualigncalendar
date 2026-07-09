@@ -70,4 +70,8 @@ export interface EventConflict {
 
 export type CalendarView = 'month' | 'week' | 'list';
 
+export type EventModality = 'face-to-face' | 'online' | 'hybrid' | 'undetermined';
+
+export type ModalityFilter = 'all' | 'face-to-face' | 'online';
+
 export interface EventFormData extends Omit<CalendarEvent, 'id' | 'createdAt' | 'updatedAt'> {}

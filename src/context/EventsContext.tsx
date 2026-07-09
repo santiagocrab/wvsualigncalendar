@@ -3,8 +3,9 @@ import {
 } from 'react';
 import rawEvents from '../data/events.json';
 import officialOrgs from '../data/official_organizations.json';
-import type { CalendarEvent, CalendarView } from '../types/event';
+import type { CalendarEvent, CalendarView, ModalityFilter } from '../types/event';
 import { detectConflicts } from '../lib/conflicts';
+import { matchesModalityFilter } from '../lib/venue';
 
 interface EventsContextValue {
   events: CalendarEvent[];
@@ -19,6 +20,8 @@ interface EventsContextValue {
   setOrgFilter: (s: string) => void;
   venueFilter: string;
   setVenueFilter: (s: string) => void;
+  modalityFilter: ModalityFilter;
+  setModalityFilter: (s: ModalityFilter) => void;
   calendarView: CalendarView;
   setCalendarView: (v: CalendarView) => void;
   calendarDate: Date;
@@ -50,6 +53,7 @@ export function EventsProvider({ children }: { children: ReactNode }) {
   const [categoryFilter, setCategoryFilter] = useState('all');
   const [orgFilter, setOrgFilter] = useState('all');
   const [venueFilter, setVenueFilter] = useState('all');
+  const [modalityFilter, setModalityFilter] = useState<ModalityFilter>('all');
   const [calendarView, setCalendarView] = useState<CalendarView>('month');
   const [calendarDate, setCalendarDate] = useState(new Date(2026, 7, 1));
 
@@ -63,11 +67,12 @@ export function EventsProvider({ children }: { children: ReactNode }) {
       if (categoryFilter !== 'all' && e.category !== categoryFilter) return false;
       if (orgFilter !== 'all' && e.organization !== orgFilter && e.host !== orgFilter) return false;
       if (venueFilter !== 'all' && e.location !== venueFilter) return false;
+      if (!matchesModalityFilter(e, modalityFilter)) return false;
       if (!q) return true;
       return [e.title, e.organization, e.host, e.location, e.description, e.category]
         .join(' ').toLowerCase().includes(q);
     });
-  }, [events, search, categoryFilter, orgFilter, venueFilter]);
+  }, [events, search, categoryFilter, orgFilter, venueFilter, modalityFilter]);
 
   const conflicts = useMemo(() => detectConflicts(events), [events]);
 
@@ -84,7 +89,7 @@ export function EventsProvider({ children }: { children: ReactNode }) {
   const value: EventsContextValue = {
     events, conflicts, darkMode, compactView, search, setSearch,
     categoryFilter, setCategoryFilter, orgFilter, setOrgFilter,
-    venueFilter, setVenueFilter,
+    venueFilter, setVenueFilter, modalityFilter, setModalityFilter,
     calendarView, setCalendarView, calendarDate, setCalendarDate,
     toggleDarkMode: useCallback(() => setDarkMode((d) => !d), []),
     toggleCompactView: useCallback(() => setCompactView((c) => !c), []),

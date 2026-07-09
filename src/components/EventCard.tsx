@@ -1,19 +1,23 @@
-import { MapPin, Clock, Users } from 'lucide-react';
+import { MapPin, Clock, Users, Monitor } from 'lucide-react';
 import type { CalendarEvent } from '../types/event';
 import { CATEGORY_META } from '../data/categories';
 import { formatTimeRange, formatDate } from '../lib/utils';
-import { CategoryBadge } from './CategoryLegend';
+import { getEventModality } from '../lib/venue';
+import { CategoryBadge, ModalityBadge } from './CategoryLegend';
 
 export function EventPill({ event, onClick }: { event: CalendarEvent; onClick: () => void }) {
   const meta = CATEGORY_META[event.category];
+  const modality = getEventModality(event);
+  const isOnline = modality === 'online';
   return (
     <button
       onClick={(e) => { e.stopPropagation(); onClick(); }}
-      className="calendar-pill w-full text-left px-2 py-1 text-[10px] truncate hover:opacity-90 transition"
+      className="calendar-pill w-full text-left px-2 py-1 text-[10px] truncate hover:opacity-90 transition flex items-center gap-1"
       style={{ backgroundColor: meta.color, color: meta.textColor }}
-      title={`${event.title} — ${event.host}`}
+      title={`${event.title} — ${event.host}${isOnline ? ' (Online)' : ''}`}
     >
-      {event.title}
+      {isOnline ? <Monitor size={9} className="shrink-0 opacity-90" /> : null}
+      <span className="truncate">{event.title}</span>
     </button>
   );
 }
@@ -38,7 +42,10 @@ export function EventListCard({ event, onClick }: { event: CalendarEvent; onClic
                 {event.host} · {formatDate(event.startDate)}
               </p>
             </div>
-            <CategoryBadge category={event.category} small />
+            <div className="flex flex-col items-end gap-1.5 shrink-0">
+              <CategoryBadge category={event.category} small />
+              <ModalityBadge event={event} small />
+            </div>
           </div>
           <div className="flex flex-wrap gap-x-3 gap-y-1 mt-2.5 text-[11px] text-usc-muted dark:text-white/45 font-medium">
             <span className="flex items-center gap-1"><MapPin size={11} />{event.location}</span>

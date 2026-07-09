@@ -1,5 +1,7 @@
 import { CATEGORY_META } from '../data/categories';
 import type { EventCategory } from '../types/event';
+import type { CalendarEvent } from '../types/event';
+import { getEventModality, MODALITY_META } from '../lib/venue';
 import { cn } from '../lib/utils';
 
 export function CategoryBadge({ category, small }: { category: EventCategory; small?: boolean }) {
@@ -25,6 +27,22 @@ export function StatusBadge({ status }: { status: string }) {
   return (
     <span className={cn('inline-flex px-2 py-0.5 rounded-full text-[10px] font-bold', colors[status] || 'bg-gray-100 text-gray-800')}>
       {status}
+    </span>
+  );
+}
+
+export function ModalityBadge({ event, small }: { event: CalendarEvent; small?: boolean }) {
+  const modality = getEventModality(event);
+  const meta = MODALITY_META[modality];
+  return (
+    <span
+      className={cn(
+        'inline-flex items-center rounded-full font-bold shrink-0',
+        small ? 'px-2 py-0.5 text-[10px]' : 'px-2.5 py-1 text-xs',
+        meta.className,
+      )}
+    >
+      {small ? meta.short : meta.label}
     </span>
   );
 }
