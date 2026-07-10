@@ -1,92 +1,302 @@
 [
-  { "name": "Green Legacy", "acronym": "GL" },
-  { "name": "COLLEGE OF DENTISTRY STUDENT COUNCIL", "acronym": "CODSC" },
-  { "name": "WVSU - Youth For Peers Organization", "acronym": "YFP" },
-  { "name": "WVSU College of Communication Student Council", "acronym": "COCSC" },
-  { "name": "Social Science Students' Society (3S' Society)", "acronym": "3S" },
-  { "name": "WVSU Development Communicators' Society", "acronym": "DCS" },
-  { "name": "ASSC Inc.", "acronym": "ASSC" },
-  { "name": "COE_ASSOCIATION OF GENERAL EDUCATION STUDENTS (AGES)", "acronym": "AGES" },
-  { "name": "Athenaeum Keepers", "acronym": "ATHENAEUM" },
-  { "name": "WVSU Education Student Council", "acronym": "ESC" },
-  { "name": "WVSU- University Mathematics Club", "acronym": "UMC" },
-  { "name": "The Mediator", "acronym": "MEDIATOR" },
-  { "name": "WEST CREW", "acronym": "WEST-CREW" },
-  { "name": "WVSU Medicine Student Council", "acronym": "MSC" },
-  { "name": "Order of Asclepius", "acronym": "ASCLEPIUS" },
-  { "name": "WVSU - Artist Guild", "acronym": "AG" },
-  { "name": "Public Campus Ministry", "acronym": "PCM" },
-  { "name": "Majors of Values Education (MOVE)", "acronym": "MOVE" },
-  { "name": "CATHOLIC STUDENT NURSES ASSOCIATION", "acronym": "CSNA" },
-  { "name": "WVSU COE Special Education Students' Association", "acronym": "SPEDSA" },
-  { "name": "WVSU - College Red Cross Youth", "acronym": "CRCY" },
-  { "name": "WVSU- COE Kapisanang Diwa at Panitik (KADIPAN)", "acronym": "KADIPAN" },
-  { "name": "PESCAR Student Council", "acronym": "PSC" },
-  { "name": "AWANA YOUTH", "acronym": "AWANA" },
-  { "name": "WVSU BAND", "acronym": "BAND" },
-  { "name": "WVSU Science Teaching Majors' Association", "acronym": "STEMA" },
-  { "name": "ASIAN MEDICAL STUDENTS' ASSOCIATION - WVSU", "acronym": "AMSA" },
-  { "name": "Nurses Christian Fellowship (NCF) – WVSU Chapter", "acronym": "NCF" },
-  { "name": "Dynamics Publication", "acronym": "DYNAMICS" },
-  { "name": "Arts and Sciences Society of English Majors (ASSEM)", "acronym": "ASSEM" },
-  { "name": "WVSU-COM Bisayang Doktor", "acronym": "BISDOK" },
-  { "name": "Vital Signs Publication", "acronym": "VITAL-SIGNS" },
-  { "name": "CHROMA", "acronym": "CHROMA" },
-  { "name": "WVSU COE - Circle of Mathematicians", "acronym": "COM" },
-  { "name": "WVSU CIPHER", "acronym": "CIPHER" },
-  { "name": "Association of Hospitality Management Students (AHMS)", "acronym": "AHMS" },
-  { "name": "MICROBIA", "acronym": "MICROBIA" },
-  { "name": "The Innovator", "acronym": "INNOVATOR" },
-  { "name": "WVSU-Space and Astronomical Science Society", "acronym": "SASS" },
-  { "name": "Forum-Dimensions", "acronym": "FORUM-DIM" },
-  { "name": "Association of Early Childhood Education Students", "acronym": "AECES" },
-  { "name": "ICON Publication", "acronym": "ICON" },
-  { "name": "Association of Physical Education Majors", "acronym": "APEM" },
-  { "name": "ALIMA Artists' Group", "acronym": "ALIMA" },
-  { "name": "LINK.exe", "acronym": "LINK" },
-  { "name": "CRU WVSU", "acronym": "CRU" },
-  { "name": "WVSU Panayana Cultural Group", "acronym": "PCG" },
-  { "name": "WVSU Rondalla Ensemble", "acronym": "RONDALLA" },
-  { "name": "WVSU Student Nurses Association of the Philippines", "acronym": "SNAP" },
-  { "name": "Pagyuhum Publication", "acronym": "PAGYUHUM" },
-  { "name": "COP Himig Kanluran sa Visayas", "acronym": "HKV" },
-  { "name": "Forensic League", "acronym": "FORENSIC" },
-  { "name": "WVSU SPARKHUB", "acronym": "SPARKHUB" },
-  { "name": "Young Journalists' Society", "acronym": "YJS" },
-  { "name": "English Majors' Organization (EMO)", "acronym": "EMO" },
-  { "name": "Campus Stray Care", "acronym": "STRAY-CARE" },
-  { "name": "WVSU College of Information and Communications Technology Student Council", "acronym": "CICT-SC" },
-  { "name": "WVSU-PC CAMPUS STUDENT COUNCIL", "acronym": "PC-SC" },
-  { "name": "Junior Administrators and Managers Society", "acronym": "JAMS" },
-  { "name": "Cyb Robotics Organization", "acronym": "CYB-ORG" },
-  { "name": "Foreign Languages Students' Society (FLSS)", "acronym": "FLSS" },
-  { "name": "WVSU-University Students' Alliance", "acronym": "USA" },
-  { "name": "Political Science Students' Organization, Inc.", "acronym": "PSSO" },
-  { "name": "axIS Organization", "acronym": "AXIS" },
-  { "name": "WVSU TeatroTayo", "acronym": "TEATROTAYO" },
-  { "name": "WVSU Campus Crusade for Christ - Medical Ministry", "acronym": "CCC-MM" },
-  { "name": "WVSU COE SILAK Media (Publication)", "acronym": "SILAK" },
-  { "name": "WVSU Film Society", "acronym": "FILM-SOC" },
-  { "name": "WVSU College of Nursing Student Council", "acronym": "CONSC" },
-  { "name": "MahaLikha", "acronym": "MAHALIKHA" },
-  { "name": "WVSU College of Business and Management Student Council", "acronym": "CBMSC" },
-  { "name": "PESCR Sports and Wellness Club", "acronym": "PSWC" },
-  { "name": "Med Symphony", "acronym": "MEDSYMPHONY" },
-  { "name": "WVSU-Tourism Students Society", "acronym": "TSS" },
-  { "name": "WVSU Chemistry Society", "acronym": "CHEMSOC" },
-  { "name": "Aklanon sa West", "acronym": "ASW" },
-  { "name": "WVSU La Musika", "acronym": "LA-MUSIKA" },
-  { "name": "The Courier", "acronym": "COURIER" },
-  { "name": "West Visayas State University - Association of DOST Scholars (WVSU-ADS)", "acronym": "ADS" },
-  { "name": "WVSU - MAARAM", "acronym": "MAARAM" },
-  { "name": "Sinagtala", "acronym": "SINAGTALA" },
-  { "name": "WVSU - Integrated Laboratory School Student Council", "acronym": "ILSSC" },
-  { "name": "ILS DANCE TROUPE", "acronym": "ILS-DANCE" },
-  { "name": "ILS Palette", "acronym": "ILS-PALETTE" },
-  { "name": "ILS Scouting Club", "acronym": "ILS-SCOUTING" },
-  { "name": "ILS PIXLESD", "acronym": "ILS-PIXLESD" },
-  { "name": "ILS Sports Club", "acronym": "ILS-SPORTS" },
-  { "name": "ILS Alpha Scintilla Science Club", "acronym": "ILS-SCINTILLA" },
-  { "name": "Alpha Omega Math Club", "acronym": "ILS-AOMC" },
-  { "name": "Aikido Iloilo: WVSU (Aiki-West)", "acronym": "AIKIDO" }
+  {
+    "name": "* Website: www.wvsu.edu.ph* Email Address:majorsofvalueseducation@gmail.com",
+    "acronym": "WWEPEA"
+  },
+  {
+    "name": "AIKIDO ILOILO: WVSU | www.aikidoiloilo.org | aikidoiloilo@gmail.com | +63 927 998 3434",
+    "acronym": "AIWAOA"
+  },
+  {
+    "name": "ALIMA Artists' Group",
+    "acronym": "AAG"
+  },
+  {
+    "name": "ARTS AND SCIENCES SOCIETY OF ENGLISH MAJORS",
+    "acronym": "ASSEM"
+  },
+  {
+    "name": "ARTS AND SCIENCES STUDENT COUNCIL, INC.",
+    "acronym": "ASSCI"
+  },
+  {
+    "name": "ASIAN MEDICAL STUDENTS’ ASSOCIATION - WVSU",
+    "acronym": "AMSA"
+  },
+  {
+    "name": "ASSOCIATION OF DOST SCHOLARS",
+    "acronym": "ADS"
+  },
+  {
+    "name": "ASSOCIATION OF EARLY CHILDHOOD EDUCATION STUDENTS",
+    "acronym": "AECES"
+  },
+  {
+    "name": "ASSOCIATION OF GENERAL EDUCATION STUDENTS",
+    "acronym": "AGES"
+  },
+  {
+    "name": "ASSOCIATION OF HOSPITALITY MANAGEMENT STUDENTS",
+    "acronym": "AHMS"
+  },
+  {
+    "name": "Association of Physical Education Majors (APEM)",
+    "acronym": "APEMA"
+  },
+  {
+    "name": "ATHENAEUM KEEPERS",
+    "acronym": "AK"
+  },
+  {
+    "name": "AWANA YOUTH",
+    "acronym": "AY"
+  },
+  {
+    "name": "BISAYANG DOKTOR",
+    "acronym": "BD"
+  },
+  {
+    "name": "CAMPUS STRAY CARE",
+    "acronym": "CSC"
+  },
+  {
+    "name": "Campus Student Council",
+    "acronym": "CSC"
+  },
+  {
+    "name": "CATHOLIC STUDENT NURSES ASSOCIATION",
+    "acronym": "CSNA"
+  },
+  {
+    "name": "CHROMA",
+    "acronym": "CHROMA"
+  },
+  {
+    "name": "COLLEGE OF BUSINESS AND MANAGEMENT STUDENT COUNCIL",
+    "acronym": "BMSC"
+  },
+  {
+    "name": "COLLEGE OF BUSINESS AND MANAGEMENT — Junior Administrators and Managers Society",
+    "acronym": "BMJAMS"
+  },
+  {
+    "name": "COLLEGE OF BUSINESS AND MANAGEMENT — TOURISM STUDENTS SOCIETY",
+    "acronym": "BMTSS"
+  },
+  {
+    "name": "COLLEGE OF COMMUNICATION STUDENT COUNCIL",
+    "acronym": "CSC"
+  },
+  {
+    "name": "COLLEGE OF DENTISTRY STUDENT COUNCIL",
+    "acronym": "CODSC"
+  },
+  {
+    "name": "COLLEGE OF INFORMATION AND COMMUNICATIONS — TECHNOLOGY STUDENT COUNCIL",
+    "acronym": "ICTSC"
+  },
+  {
+    "name": "CRU WVSU",
+    "acronym": "CRU"
+  },
+  {
+    "name": "CYB ROBOTICS ORGANIZATION",
+    "acronym": "CRO"
+  },
+  {
+    "name": "Dynamics Publication",
+    "acronym": "DYNAMICS"
+  },
+  {
+    "name": "EDUCATION STUDENT COUNCIL",
+    "acronym": "ESC"
+  },
+  {
+    "name": "Email Address: axisorganization.cict@gmail.com | Contact No.: 09273940952",
+    "acronym": "EAACGC"
+  },
+  {
+    "name": "Emergency First Aid Training",
+    "acronym": "EFAT"
+  },
+  {
+    "name": "ENGLISH MAJORS’ ORGANIZATION (EMO)",
+    "acronym": "EMOE"
+  },
+  {
+    "name": "FOREIGN LANGUAGES STUDENTS’ SOCIETY (FLSS)",
+    "acronym": "FLSSF"
+  },
+  {
+    "name": "Forensic League",
+    "acronym": "FL"
+  },
+  {
+    "name": "HIMIG KANULRAN SA VISAYAS STUDENT COUNCIL",
+    "acronym": "HKSSC"
+  },
+  {
+    "name": "ICON Publication",
+    "acronym": "IP"
+  },
+  {
+    "name": "LINK.exe",
+    "acronym": "LE"
+  },
+  {
+    "name": "List of Officers",
+    "acronym": "LO"
+  },
+  {
+    "name": "Med Symphony",
+    "acronym": "MS"
+  },
+  {
+    "name": "MEDICINE STUDENT COUNCIL",
+    "acronym": "MSC"
+  },
+  {
+    "name": "Mga Mag-Aaral na may Adbokasiya sa Pagtib-ung sang Kulturang Manggad",
+    "acronym": "MMANMA"
+  },
+  {
+    "name": "MICROBIA",
+    "acronym": "MICROBIA"
+  },
+  {
+    "name": "NURSING STUDENT COUNCIL",
+    "acronym": "NSC"
+  },
+  {
+    "name": "Order of Asclepius",
+    "acronym": "ASCLEPIUS"
+  },
+  {
+    "name": "PAGYUHUM PUBLICATION",
+    "acronym": "PP"
+  },
+  {
+    "name": "PESCAR SPORTS AND WELLNESS CLUB",
+    "acronym": "PSWC"
+  },
+  {
+    "name": "PESCAR STUDENT COUNCIL",
+    "acronym": "PSC"
+  },
+  {
+    "name": "SCIENCE TEACHING MAJORS’ ASSOCIATION",
+    "acronym": "STMA"
+  },
+  {
+    "name": "Sinagtala",
+    "acronym": "SINAGTALA"
+  },
+  {
+    "name": "SPACE AND ASTRONOMICAL SCIENCE SOCIETY",
+    "acronym": "SASS"
+  },
+  {
+    "name": "SPECIAL EDUCATION STUDENTS’ ASSOCIATION",
+    "acronym": "SESA"
+  },
+  {
+    "name": "STUDENT NURSES ASSOCIATION OF THE PHILIPPINES",
+    "acronym": "SNAP"
+  },
+  {
+    "name": "THE COURIER",
+    "acronym": "THE"
+  },
+  {
+    "name": "THE MEDIATOR",
+    "acronym": "THE"
+  },
+  {
+    "name": "The Official Publication of College of Business and Management",
+    "acronym": "OPBM"
+  },
+  {
+    "name": "UNIVERSITY MATHEMATICS CLUB",
+    "acronym": "MC"
+  },
+  {
+    "name": "University Student Council",
+    "acronym": "USC"
+  },
+  {
+    "name": "VITAL SIGNS PUBLICATION",
+    "acronym": "VSP"
+  },
+  {
+    "name": "Website:www.wvsu.edu.ph *Email Address: ilssc@wvsu.edu.ph",
+    "acronym": "WWEPEA"
+  },
+  {
+    "name": "WEST CREW",
+    "acronym": "WEST"
+  },
+  {
+    "name": "West Visayas State University​ — WVSU Panayana Cultural Group",
+    "acronym": "PCG"
+  },
+  {
+    "name": "WVSU - ARTIST GUILD",
+    "acronym": "AG"
+  },
+  {
+    "name": "WVSU BAND",
+    "acronym": "WVSU"
+  },
+  {
+    "name": "WVSU Campus Crusade for Christ - Medical Ministry",
+    "acronym": "CCCMM"
+  },
+  {
+    "name": "WVSU CHEMISTRY SOCIETY",
+    "acronym": "CS"
+  },
+  {
+    "name": "WVSU COE - CIRCLE OF MATHEMATICIANS",
+    "acronym": "CCM"
+  },
+  {
+    "name": "WVSU Development Communicators' Society",
+    "acronym": "DCS"
+  },
+  {
+    "name": "WVSU FILM SOCIETY",
+    "acronym": "FS"
+  },
+  {
+    "name": "WVSU LA MUSIKA",
+    "acronym": "LM"
+  },
+  {
+    "name": "WVSU RONDALLA ENSEMBLE",
+    "acronym": "RE"
+  },
+  {
+    "name": "WVSU SPARKHUB",
+    "acronym": "WVSU"
+  },
+  {
+    "name": "WVSU TEATROTAYO",
+    "acronym": "WVSU"
+  },
+  {
+    "name": "WVSU- COE Kapisanang Diwa at Panitik (KADIPAN)",
+    "acronym": "KADIPAN"
+  },
+  {
+    "name": "WVSU-UNIVERSITY STUDENTS’ ALLIANCE",
+    "acronym": "SA"
+  },
+  {
+    "name": "YOUNG JOURNALISTS’ SOCIETY",
+    "acronym": "YJS"
+  },
+  {
+    "name": "​WVSU - YOUTH FOR PEERS ORGANIZATION​",
+    "acronym": "YPO"
+  }
 ]
