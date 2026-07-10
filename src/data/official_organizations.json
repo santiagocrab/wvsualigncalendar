@@ -24,6 +24,10 @@
     "acronym": "AMSA"
   },
   {
+    "name": "ASSC Inc.",
+    "acronym": "ASSC"
+  },
+  {
     "name": "ASSOCIATION OF DOST SCHOLARS",
     "acronym": "ADS"
   },
@@ -132,12 +136,20 @@
     "acronym": "FL"
   },
   {
+    "name": "Green Legacy",
+    "acronym": "GL"
+  },
+  {
     "name": "HIMIG KANULRAN SA VISAYAS STUDENT COUNCIL",
     "acronym": "HKSSC"
   },
   {
     "name": "ICON Publication",
     "acronym": "IP"
+  },
+  {
+    "name": "ILS Alpha Omega Math Club",
+    "acronym": "ILS-AOMC"
   },
   {
     "name": "LINK.exe",
@@ -178,6 +190,10 @@
   {
     "name": "PESCAR SPORTS AND WELLNESS CLUB",
     "acronym": "PSWC"
+  },
+  {
+    "name": "PESCAR Student Council",
+    "acronym": "PSC"
   },
   {
     "name": "PESCAR STUDENT COUNCIL",
@@ -224,6 +240,10 @@
     "acronym": "USC"
   },
   {
+    "name": "Verify Host (Master Calendar)",
+    "acronym": "REF"
+  },
+  {
     "name": "VITAL SIGNS PUBLICATION",
     "acronym": "VSP"
   },
@@ -244,6 +264,18 @@
     "acronym": "AG"
   },
   {
+    "name": "WVSU - College Red Cross Youth",
+    "acronym": "CRCY"
+  },
+  {
+    "name": "WVSU - Integrated Laboratory School Student Council",
+    "acronym": "ILSSC"
+  },
+  {
+    "name": "WVSU - Youth For Peers Organization",
+    "acronym": "YFP"
+  },
+  {
     "name": "WVSU BAND",
     "acronym": "WVSU"
   },
@@ -256,12 +288,44 @@
     "acronym": "CS"
   },
   {
+    "name": "WVSU COE - Circle of Mathematicians",
+    "acronym": "COM"
+  },
+  {
     "name": "WVSU COE - CIRCLE OF MATHEMATICIANS",
     "acronym": "CCM"
   },
   {
+    "name": "WVSU COE Special Education Students' Association",
+    "acronym": "SPEDSA"
+  },
+  {
+    "name": "WVSU College of Business and Management Student Council",
+    "acronym": "CBMSC"
+  },
+  {
+    "name": "WVSU College of Communication Student Council",
+    "acronym": "COCSC"
+  },
+  {
+    "name": "WVSU College of Information and Communications Technology Student Council",
+    "acronym": "CICT-SC"
+  },
+  {
+    "name": "WVSU College of Law Student Council",
+    "acronym": "COL-SC"
+  },
+  {
+    "name": "WVSU College of Nursing Student Council",
+    "acronym": "CONSC"
+  },
+  {
     "name": "WVSU Development Communicators' Society",
     "acronym": "DCS"
+  },
+  {
+    "name": "WVSU Education Student Council",
+    "acronym": "ESC"
   },
   {
     "name": "WVSU FILM SOCIETY",
@@ -272,8 +336,16 @@
     "acronym": "LM"
   },
   {
+    "name": "WVSU Medicine Student Council",
+    "acronym": "MSC"
+  },
+  {
     "name": "WVSU RONDALLA ENSEMBLE",
     "acronym": "RE"
+  },
+  {
+    "name": "WVSU Science Teaching Majors' Association",
+    "acronym": "STEMA"
   },
   {
     "name": "WVSU SPARKHUB",
